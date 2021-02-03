@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/NewWindow.css">
+    <link rel="stylesheet" href="css/Button.css">
+    <link rel="stylesheet" href="css/Style.css">
+
+    <script src="lib/echarts.min.js"></script>
+    <script src='theme/vintage.js'></script>
+    <script src="theme/dark.js"></script>
+    <script src="theme/chalk.js"></script>
+    <script src="lib/jquery-3.3.1.min.js"></script>
+
+    <script src="data/GrayOfFisrtFloor.js"></script>
+    <script src="data/GrayOfSecondFloor.js"></script>
+    <script src="data/Day1/Time/Day1Time.js"></script>
+    <script src="data/Day2/Time/Day2Time.js"></script>
+    <script src="data/Day3/Time/Day3Time.js"></script>
+
+    <script src="data/Day1/HeatMap/Day1Floor1HeatMap.js"></script>
+    <script src="data/Day1/HeatMap/Day1Floor2HeatMap.js"></script>
+    <script src="data/Day2/HeatMap/Day2Floor1HeatMap.js"></script>
+    <script src="data/Day2/HeatMap/Day2Floor2HeatMap.js"></script>
+    <script src="data/Day3/HeatMap/Day3Floor1HeatMap.js"></script>
+    <script src="data/Day3/HeatMap/Day3Floor2HeatMap.js"></script>
+    <script src="data/TreeData.js"></script>
+    <script src="data/TrailData.js"></script>
+
+    <title>Index</title>
+
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    CICSC大会数据分析
+</div>
+
+<div style="width: 1600px;height: 850px;position:absolute;left:8%">
+    <!--<br>-->
+    <!--选择天数，搜索框，搜索键，上边窗口-->
+    <div>
+        <p class="newLine">
+            <button type="button" class="dataDemo" id="Day_1">Day1</button>
+            <button type="button" class="dataDemo" id="Day_2">Day2</button>
+            <button type="button" class="dataDemo" id="Day_3">Day3</button>
+            <span style="float: right">
+            <input id="search">
+            <button id="confirm" class="dataDemo">搜索</button>
+        </span>
+        </p>
+    </div>
+
+    <!--大致轨迹图，左边窗口-->
+    <div style="width: 30%;height: 50%;position: absolute;top:50%;margin-top: 60px" class="border-container">
+        <div id="Rresult" style="float:left; width: 100%;height: 100%;position: relative"></div>
+        <div id="Route" style="width: 100%;height: 100%;position: absolute"></div>
+        <span class="top-left border-span"></span>
+        <span class="bottom-left border-span"></span>
+        <span class="bottom-right border-span"></span>
+    </div>
+
+    <!--日程图，左边窗口-->
+    <div style="float: left;width: 30%;height: 50%;" class="border-container">
+        <div id="Agenda" style="width: 100%;height: 100% ;padding: 0;margin-top: 0"></div>
+        <span class="top-left border-span"></span>
+        <span class="top-right border-span"></span>
+        <span class="bottom-left border-span"></span>
+    </div>
+
+
+    <!--热力图，中间窗口-->
+    <div style="float:left;width: 50%;height: 100%;" class="border-container">
+        <div id="HM1" style="width: 100%;height: 50%"></div>
+        <div id="HM2" style="width: 100%;height: 50%"></div>
+        <span class="top-left border-span"></span>
+        <span class="top-right border-span"></span>
+        <span class="bottom-left border-span"></span>
+        <span class="bottom-right border-span"></span>
+    </div>
+
+    <!--id图，按钮组，签到表,右边窗口-->
+    <div style="float:left;width:20%;height: 50%;padding: 0;" class="border-container">
+        <div id="ID" style="float: left;width: 50%;height: 100%;overflow: scroll;margin-top: 0"
+             class="border-container"></div>
+        <div id="buttonset" style="float: left;width: 50%;height: 100%;">
+            <button type="button" id="LineChart" class="dataDemo" style="margin:40px 30px 20px ;">人流变化<br>趋势图</button>
+            <button type="button" id="TreeChart" class="dataDemo" style="margin:20px  30px;">人员分类<br>树状图</button>
+            <button type="button" id="BubbleChart" class="dataDemo" style="margin:20px 30px;">空白停留时间图<br>区域图</button>
+            <button type="button" id="AbnormalChart" class="dataDemo" style="margin:20px 30px;">空白停留时间图</button>
+        </div>
+        <span class="top-left border-span"></span>
+        <span class="top-right border-span"></span>
+    </div>
+
+    <div style="float: left;width: 20%;height: 50%;margin-top: 0;" class="border-container">
+        <!--签到表,右边窗口-->
+        <div id="check" style="float: left;width: 100%;height: 100%;"></div>
+        <span class="bottom-left border-span"></span>
+        <span class="bottom-right border-span"></span>
+    </div>
+</div>
+
+<!--新窗口区域，显示个人的轨迹图等各种图-->
+<div id="light" class="white_content">
+    <div id="Trail" style="width:600px;height: 560px;"></div>
+    <br>
+    <button class="ShutDown" type="button" style="float: right;">
+        <a class="exit" href="javascript:void(0)" onclick="
+       document.getElementById('light').style.display='none';
+       document.getElementById('fade').style.display='none'">关闭
+        </a>
+    </button>
+</div>
+<div id="fade" class="black_overlay"></div>
+
+<div id="cover" class="white_content">
+    <!--<br>-->
+    <!--<button class="ShutDown" type="button" style="float: right;">-->
+    <!--<a class="exit" href="javascript:void(0)" onclick="-->
+    <!--document.getElementById('cover').style.display='none';-->
+    <!--document.getElementById('background').style.display='none';-->
+    <!--">关闭-->
+    <!--</a>-->
+    <!--</button>-->
+</div>
+<div id="background" class="black_overlay"></div>
+
+
+<!--图表分块-->
+<script src="js/HeatMap.js"></script>
+<script src="js/LineChart.js"></script>
+<script src="js/TrailMap.js"></script>
+<script src="js/GetId.js"></script>
+<script src="js/Check.js"></script>
+<script src="js/DaySelector.js"></script>
+<script src="js/Tree.js"></script>
+<script src="js/Bubble.js"></script>
+<script src="js/Agenda.js"></script>
+<script src="js/Route.js"></script>
+<script src="js/RouteResult.js"></script>
+<script src="js/Abnormal.js"></script>
+<script>
+    var flag =0;
+    document.onkeyup = function (event) {
+        if (event.keyCode === 27) {
+            document.getElementById('light').style.display = 'none';
+            document.getElementById('fade').style.display = 'none';
+            document.getElementById('cover').style.display = 'none';
+            document.getElementById('background').style.display = 'none';
+        }else if(event.keyCode === 82 && flag === 0){
+            document.getElementById('Route').style.display = 'none';
+            document.getElementById('Rresult').style.display = 'block';
+            flag = 1;
+        }else if(event.keyCode === 82 && flag === 1){
+            document.getElementById('Rresult').style.display = 'none';
+            document.getElementById('Route').style.display = 'block';
+            flag = 0;
+        }
+    };
+</script>
+</body>
+</html>
+
+<!--备用-->
+<!--树图和折线图-->
+<!--<div id="Tree" style="width: 100%;height: 50%"></div>-->
+<!--<hr>-->
+<!--<div id="LC" style="width: 100%;height: 48%"></div>-->

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../lib/echarts.min.js"></script>
+    <script src="../theme/vintage.js"></script>
+    <script src="../lib/jquery-3.3.1.min.js"></script>
+    <script src="../data/TrailData.js"></script>
+    <title>Test</title>
+    <style type="text/css">
+        #divframe {
+            border: 1px solid #999;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .loadTitle {
+            background: #CCC;
+            height: 30px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        // $(function(){
+        //     $("#btn").click(function(){
+        //         $.getJSON("../data/userinfo.json",function(data){
+        //             var $jsontip = $("#jsonTip");
+        //             var strHtml = "123";//存储数据的变量
+        //             $jsontip.empty();//清空内容
+        //             $.each(data,function(infoIndex,info){
+        //                 strHtml += "姓名："+info["name"]+"<br>";
+        //                 strHtml += "性别："+info["sex"]+"<br>";
+        //                 strHtml += "邮箱："+info["email"]+"<br>";
+        //                 strHtml += "<hr>"
+        //             })
+        //             $jsontip.html(strHtml);//显示处理后的数据
+        //         })
+        //     })
+        // })
+
+        // $(function () {
+        //     $("#btn").click(function(){
+        //         $.getJSON("../data/userinfo.json",function(data){
+        //             var $jsontip = $("#jsonTip");
+        //             var strHtml = "";//存储数据的变量
+        //             $.each(data,function(infoIndex,info){
+        //                 strHtml += "name=" +info["name"] + "<br>sex=" + info["sex"]+ "<hr>";
+        //             });
+        //             alert(strHtml);
+        //             $jsontip.html(strHtml);
+        //         })
+        //     })
+        // });
+
+        //  等同于$(function(){})
+        //  $(document).ready(function(){
+        //      $.ajax({
+        //          type:"get",
+        //          dataType:"json",
+        //          url:'../data/1.json',
+        //          asnyc: false,
+        //          success:function(data){
+        //              testtext = data[1].x;
+        //              testtext = "string";
+        //      }
+        //      });
+        //  });
+
+
+        // var graydata = '[[0, 0, 1], [0, 1, 1]]';
+        //
+        // console.log(graydata);
+        // // console.log(graydata.map(function (item) {
+        // //     return [item[1], item[0], item[2] || '-'];
+        // // }));
+    </script>
+
+</head>
+<body>
+<p id="demo"></p>
+<script type="text/javascript">
+    // $(function () {
+    // var s = 0;
+    // $.ajax({
+    //         url: "Day1.json",//json文件位置
+    //         type: "GET",//请求方式为get
+    //         dataType: "json", //返回数据格式为json
+    //         success: function (data) {//请求成功完成后要执行的方法
+    //             //each循环 使用$.each方法遍历返回的数据date
+    //             // $.each(data.list, function (i, item) {
+    //             //     var str = '<div>' + item.id+ '</div>';
+    //             //     document.write(str);
+    //             // })
+    //             var array = data.list;
+    //             var str = '<div>' + array[s].xy + '</div>'
+    //             document.write(str);
+    //         }
+    // });
+    // })//成功
+
+    // var obj = JSON.parse('{"name":"baby","site":"留在我身边"}');
+    // document.getElementById('demo').innerHTML = obj.name + obj.site;
+    // $(function () {
+    //     //写法简单，异步请求
+    //     //获取页面数组
+    //     // alert('yes');
+    var n = 1;
+    $.getJSON("../Day1.json", function (data) {
+        var array = data.list;
+        var str = '<div>' + array[n].xy + '</div>';
+        var str1 = array[n].xy;
+        var str2 = '<div>' + Line[10001] + '</div>';
+        // var obj = eval('('+array[n].xy+')');
+        // var arr = JSON.parse(array[n].xy);
+        // var str3 =  "[[2, '15:00'], [3, 8], [7, 6], [17, 15]];"
+        var arr = eval(array[n].xy);
+        document.write(str);
+        document.write(str2);
+        // console.log(obj);
+
+        console.log(array[n].xy);
+        console.log(Line[10001]);
+        console.log(str1);
+        // console.log(str3);
+        console.log(arr);
+
+        // var jsonStr = '[{"id":"01","open":false,"pId":"0","name":"A部门"},{"id":"01","open":false,"pId":"0","name":"A部门"}]'
+        // console.log(jsonStr);
+        // var jsonObj =  JSON.parse(jsonStr);//转换为json对象
+        // console.log(jsonObj);
+    });//成功
+
+    // // });
+    //     //写法稍微复杂，同步请求
+    //     // $.ajax({
+    //     //     type: "get",//请求方式
+    //     //     url: "demo.json",//地址，就是json文件的请求路径
+    //     //     dataType: "json",//数据类型可以为 text xml json  script  jsonp
+    //     //     async: false,
+    //     //     success: function(data){//返回的参数就是 action里面所有的有get和set方法的参数
+    //     //         data = JSON.parse(data);
+    //     //         var Person = data.list;
+    //     //         for(var i in Person){
+    //     //             Person[i].id;
+    //     //             console.log(Person[i].id);
+    //     //         }
+    //     //     }
+    //     // });
+    // })
+</script>
+<!--<div id="main" style="width: 800px;height: 600px;"></div>-->
+<!--<div id="divframe">-->
+<!--<div class="loadTitle">-->
+<!--<input type="button" value="获取数据" id="btn"/>-->
+<!--</div>-->
+<!--<div id="jsonTip"> </div>-->
+<!--</div>-->
+
+</body>
+</html>

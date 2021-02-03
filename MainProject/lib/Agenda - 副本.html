@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="echarts.min.js"></script>
+    <script src="../theme/vintage.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="Agenda" style="width: 1000px;height: 500px"></div>
+<script>
+    $.getJSON('Daytest.json',function (data) {
+
+        var time = "7:00:00";
+        var time2 = "18:00:00";
+
+        // 将标准时间转换为时间戳
+        function time_to_sec(time) {
+            var s;
+            var hour = time.split(':')[0];
+            var min = time.split(':')[1];
+            var sec = time.split(':')[2];
+
+            s = Number(hour * 3600) + Number(min * 60) + Number(sec);
+            return s;
+        }
+
+        var startTime = time_to_sec(time);
+        var endTime = time_to_sec(time2);
+
+        //
+
+        // var person = ['10000', '10001', '10002', '10003', '10004', '10005', '10006', '10007', '10008', '10009', '10010', '10011', '10012', '10013', '10014',];
+
+
+        // var areas = [
+        //     {name: '主会场', id: '13', color: '#e10900'},
+        //     {name: '分会场A', id: '2', color: '#ff7102'},
+        //     {name: '分会场B', id: '3', color: '#fee200'},
+        //     {name: '分会场C', id: '4', color: '#00be62'},
+        //     {name: '分会场D', id: '5', color: '#0ba2f7'},
+        // ];
+
+        // echarts.util.each(areas, function (area, index) {
+        //     var baseTime = startTime;
+        //
+        // });
+        $.each()
+
+        var Agenda = echarts.init(document.getElementById('Agenda'), 'vintage');
+
+        function renderItem(params, api) {
+            var categoryIndex = api.value(0);
+            var start = api.coord([api.value(1), categoryIndex]);
+            var end = api.coord([api.value(2), categoryIndex]);
+            var height = api.size([0, 1])[1] * 0.6;
+
+            var rectShape = echarts.graphic.clipRectByRect({
+                x: start[0],
+                y: start[1] - height / 2,
+                width: end[0] - start[0],
+                height: height
+            }, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            });
+
+            return rectShape && {
+                type: 'rect',
+                shape: rectShape,
+                style: api.style()
+            };
+        }
+
+        var option = {
+            tooltip: {
+                formatter: function (params) {
+                    return params.marker + params.name + ':' + params.value[3] + 's';
+                }
+            },
+            title: {
+                text: 'Agenda',
+                left: 'center',
+            },
+            grid: {
+                height: 300
+            },
+            xAxis: {
+                min: startTime,
+                max: endTime,
+                scale: true,
+                axisLabel: {
+                    formatter: function (val) {
+                        //将时间戳转换成标准时间
+                        function sec_to_time(s) {
+                            var t;
+                            if(s > -1){
+                                var hour = Math.floor(s/3600);
+                                var min = Math.floor(s/60) % 60;
+                                var sec = s % 60;
+                                if(hour < 10) {
+                                    t = '0'+ hour + ":";
+                                } else {
+                                    t = hour + ":";
+                                }
+                                if(min < 10){t += "0";}
+                                t += min + ":";
+                                if(sec < 10){t += "0";}
+                                t += sec.toFixed(0);
+                            }
+                            console.log(t);
+                            return t;
+                        }
+                        return sec_to_time(val);
+                    }
+                }
+            },
+            yAxis: {
+                type: 'category',
+                data: person,
+            },
+            dataZoom: [
+                {
+                    type: 'slider',
+                    show: true,
+                    xAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'slider',
+                    show: true,
+                    yAxisIndex: [0],
+                    left: '93%',
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    yAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                }
+            ],//侧边和下边
+            series: [{
+                type: 'custom',
+                renderItem: renderItem,
+                itemStyle: {
+                    normal: {
+                        opacity: 0.8
+                    }
+                },
+                encode: {
+                    x: [1, 2],
+                    y: 0
+                }
+                // data:
+            }],
+        };
+
+        Agenda.setOption(option);
+    })
+</script>
+</body>
+</html>

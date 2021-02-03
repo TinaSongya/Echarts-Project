@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src ="../lib/echarts.min.js"></script>
+    <script src ="../theme/vintage.js"></script>
+    <style>
+        div{float:left}
+    </style>
+    <title>ConnectionTest</title>
+</head>
+<body>
+<div style="width: 1600px;height: 800px;">
+    <div class="newLine">
+        <button type="button" class="dataDemo" id="Day_1">Day1</button>
+        <button type="button" class="dataDemo" id="Day_2">Day2</button>
+        <button type="button" class="dataDemo" id="Day_3">Day3</button>
+    </div>
+    <div id="1" style="width: 800px;height: 800px"></div>
+    <div id="2" style="width: 800px;height: 800px"></div>
+</div>
+
+<script type="text/javascript">
+    var arr = document.getElementsByTagName('button');
+    for (var i = 0; i < arr.length; i++) {
+        arr[i].onclick = function () {
+            if (this.id == 'Day_1') {
+                one();
+            } else if (this.id == 'Day_2') {
+                two();
+            } else if (this.id == 'Day_3') {
+                three();
+            }
+        };
+    }
+
+    function one(){
+        var mychart = echarts.init(document.getElementById('1'),'vintage');
+
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line'
+            }]
+        };
+
+        mychart.setOption(option);
+    }
+    function two(){
+        var mychart = echarts.init(document.getElementById('1'),'vintage');
+
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [200, 300, 400, 500, 1290, 700, 600],
+                type: 'line'
+            }]
+        };
+
+
+        mychart.setOption(option);
+    }
+    function three(){
+        var mychart = echarts.init(document.getElementById('1'),'vintage');
+
+        option = {
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [700, 500, 400, 934, 1290, 600, 1320],
+                type: 'line',
+                areaStyle: {}
+            }]
+        };
+
+
+
+        mychart.setOption(option);
+    }
+
+    one();
+</script>
+
+
+
+
+
+    <!--<script type="text/javascript">-->
+
+        <!--var chart1 = echarts.init(document.getElementById('1'),'vintage');-->
+
+        <!--var option1 = {-->
+            <!--title: {-->
+                <!--text: '堆叠区域图2'-->
+            <!--},-->
+            <!--tooltip : {-->
+                <!--trigger: 'axis',-->
+                <!--axisPointer: {-->
+                    <!--type: 'cross',-->
+                    <!--label: {-->
+                        <!--backgroundColor: '#6a7985'-->
+                    <!--}-->
+                <!--}-->
+            <!--},-->
+            <!--legend: {-->
+                <!--data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']-->
+            <!--},-->
+            <!--toolbox: {-->
+                <!--feature: {-->
+                    <!--saveAsImage: {}-->
+                <!--}-->
+            <!--},-->
+            <!--grid: {-->
+                <!--left: '3%',-->
+                <!--right: '4%',-->
+                <!--bottom: '3%',-->
+                <!--containLabel: true-->
+            <!--},-->
+            <!--xAxis : [-->
+                <!--{-->
+                    <!--type : 'category',-->
+                    <!--boundaryGap : false,-->
+                    <!--data : ['周一','周二','周三','周四','周五','周六','周日']-->
+                <!--}-->
+            <!--],-->
+            <!--yAxis : [-->
+                <!--{-->
+                    <!--type : 'value'-->
+                <!--}-->
+            <!--],-->
+            <!--series : [-->
+                <!--{-->
+                    <!--name:'邮件营销',-->
+                    <!--type:'line',-->
+                    <!--stack: '总量',-->
+                    <!--areaStyle: {},-->
+                    <!--data:[120, 132, 101, 134, 90, 230, 210]-->
+                <!--},-->
+                <!--{-->
+                    <!--name:'联盟广告',-->
+                    <!--type:'line',-->
+                    <!--stack: '总量',-->
+                    <!--areaStyle: {},-->
+                    <!--data:[220, 182, 191, 234, 290, 330, 310]-->
+                <!--},-->
+                <!--{-->
+                    <!--name:'视频广告',-->
+                    <!--type:'line',-->
+                    <!--stack: '总量',-->
+                    <!--areaStyle: {},-->
+                    <!--data:[150, 232, 201, 154, 190, 330, 410]-->
+                <!--},-->
+                <!--{-->
+                    <!--name:'直接访问',-->
+                    <!--type:'line',-->
+                    <!--stack: '总量',-->
+                    <!--areaStyle: {normal: {}},-->
+                    <!--data:[320, 332, 301, 334, 390, 330, 320]-->
+                <!--},-->
+                <!--{-->
+                    <!--name:'搜索引擎',-->
+                    <!--type:'line',-->
+                    <!--stack: '总量',-->
+                    <!--label: {-->
+                        <!--normal: {-->
+                            <!--show: true,-->
+                            <!--position: 'top'-->
+                        <!--}-->
+                    <!--},-->
+                    <!--areaStyle: {normal: {}},-->
+                    <!--data:[820, 932, 901, 934, 1290, 1330, 1320]-->
+                <!--}-->
+            <!--]-->
+        <!--};-->
+
+        <!--chart1.setOption(option1);-->
+    <!--</script>-->
+<!--<script type="text/javascript">-->
+    <!--var chart2 = echarts.init(document.getElementById('2'),'vintage');-->
+
+    <!--var option2 = {-->
+        <!--title: {-->
+            <!--text: '堆叠区域图一'-->
+        <!--},-->
+        <!--tooltip : {-->
+            <!--trigger: 'axis',-->
+            <!--axisPointer: {-->
+                <!--type: 'cross',-->
+                <!--label: {-->
+                    <!--backgroundColor: '#6a7985'-->
+                <!--}-->
+            <!--}-->
+        <!--},-->
+        <!--legend: {-->
+            <!--// data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']-->
+        <!--},-->
+        <!--toolbox: {-->
+            <!--feature: {-->
+                <!--saveAsImage: {}-->
+            <!--}-->
+        <!--},-->
+        <!--grid: {-->
+            <!--left: '3%',-->
+            <!--right: '4%',-->
+            <!--bottom: '3%',-->
+            <!--containLabel: true-->
+        <!--},-->
+        <!--xAxis : [-->
+            <!--{-->
+                <!--type : 'category',-->
+                <!--boundaryGap : false,-->
+                <!--data : ['周一','周二','周三','周四','周五','周六','周日']-->
+            <!--}-->
+        <!--],-->
+        <!--yAxis : [-->
+            <!--{-->
+                <!--type : 'value'-->
+            <!--}-->
+        <!--],-->
+        <!--series : [-->
+            <!--{-->
+                <!--name:'邮件营销',-->
+                <!--type:'line',-->
+                <!--stack: '总量',-->
+                <!--areaStyle: {},-->
+                <!--data:[120, 132, 101, 134, 90, 230, 210]-->
+            <!--},-->
+            <!--{-->
+                <!--name:'联盟广告',-->
+                <!--type:'line',-->
+                <!--stack: '总量',-->
+                <!--areaStyle: {},-->
+                <!--data:[220, 182, 191, 234, 290, 330, 310]-->
+            <!--},-->
+            <!--{-->
+                <!--name:'视频广告',-->
+                <!--type:'line',-->
+                <!--stack: '总量',-->
+                <!--areaStyle: {},-->
+                <!--data:[150, 232, 201, 154, 190, 330, 410]-->
+            <!--},-->
+            <!--{-->
+                <!--name:'直接访问',-->
+                <!--type:'line',-->
+                <!--stack: '总量',-->
+                <!--areaStyle: {normal: {}},-->
+                <!--data:[320, 332, 301, 334, 390, 330, 320]-->
+            <!--},-->
+            <!--{-->
+                <!--name:'搜索引擎',-->
+                <!--type:'line',-->
+                <!--stack: '总量',-->
+                <!--label: {-->
+                    <!--normal: {-->
+                        <!--show: true,-->
+                        <!--position: 'top'-->
+                    <!--}-->
+                <!--},-->
+                <!--areaStyle: {normal: {}},-->
+                <!--data:[820, 932, 901, 934, 1290, 1330, 1320]-->
+            <!--}-->
+        <!--]-->
+    <!--};-->
+    <!--chart2.setOption(option2);-->
+<!--</script>-->
+<!--<script type="text/javascript">-->
+    <!--echarts.connect([chart1,chart2]);//联动测试-->
+<!--</script>-->
+</body>
+</html>
